@@ -3,51 +3,43 @@
 // Suis les TODO dans l'ordre. La constante plantes vient de plantes.js.
 // =====================================================
 
-
 // ---------- PARTIE 1 : les fonctions qui CALCULENT ----------
 // Elles reçoivent des données et RETOURNENT un résultat.
 // Elles ne touchent pas à la page.
 
-
 // TODO 1 — compterAArroser(liste)
 // Retourne le nombre de plantes de la liste dont aArroser vaut true.
 function compterAArroser(liste) {
-    let compteur = 0;
-    liste.forEach((plante) => {
-      if (plante.aArroser) {
-        compteur ++
-      }  
-    });
-    return compteur;
-
+  let compteur = 0;
+  liste.forEach((plante) => {
+    if (plante.aArroser) {
+      compteur++;
+    }
+  });
+  return compteur;
 }
 
 // Vérifie dans la console avant de passer à la suite :
 // console.log(compterAArroser(plantes)) // doit afficher 4
 
-
 // TODO 2 — filtrerParLieu(liste, lieu)
 // Retourne un NOUVEAU tableau avec seulement les plantes dont le lieu
 // est égal au paramètre lieu ("intérieur" ou "extérieur").
 function filtrerParLieu(liste, lieu) {
+  const resultat = [];
 
-    const resultat = []
-
-    liste.forEach((plante) => {
-        if (plante.lieu === lieu) {
-            resultat.push(plante);
-        }
-    })
-    return resultat;
-
+  liste.forEach((plante) => {
+    if (plante.lieu === lieu) {
+      resultat.push(plante);
+    }
+  });
+  return resultat;
 }
 
 // console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
 
-
 // ---------- PARTIE 2 : les fonctions qui AFFICHENT ----------
 // Elles modifient la page. Elles ne retournent rien.
-
 
 // TODO 3 — afficherPlantes(liste)
 // 1. Vide la liste <ul id="liste">
@@ -56,43 +48,53 @@ function filtrerParLieu(liste, lieu) {
 // 4. Mets à jour <p id="compteur"> : « 4 plantes à arroser sur 8 »
 //    (utilise compterAArroser, ne recompte pas ici)
 function afficherPlantes(liste) {
-    const maliste = document.getElementById("liste")
-    maliste.textContent = "";
-    
-    liste.forEach((plante)  => {
-        const element = document.createElement("li")
+  const maliste = document.getElementById("liste");
+  maliste.textContent = "";
 
-        element.textContent = plante.emoji + " " + plante.nom;
-        if (plante.aArroser) {
-        element.classList.add("a-arroser");    
-        }
+  liste.forEach((plante) => {
+    const element = document.createElement("li");
 
-        maliste.appendChild(element)
-    })
-        const compteur = document.getElementById("compteur")
-        compteur.textContent = `${compterAArroser(liste)} plantes à arroser sur ${liste.length}`
+    element.textContent = plante.emoji + " " + plante.nom;
+    if (plante.aArroser) {
+      element.classList.add("a-arroser");
+    }
+
+    maliste.appendChild(element);
+  });
+  const compteur = document.getElementById("compteur");
+  compteur.textContent = `${compterAArroser(liste)} plantes à arroser sur ${liste.length}`;
 }
-
 
 // TODO 4 — Au chargement de la page, affiche toutes les plantes.
 
-afficherPlantes(plantes)
+afficherPlantes(plantes);
 
 // ---------- PARTIE 3 : les clics ----------
-
 
 // TODO 5 — Les trois boutons de filtre
 // Au clic sur « Intérieur » : affiche seulement les plantes d'intérieur.
 // Au clic sur « Extérieur » : seulement celles d'extérieur.
 // Au clic sur « Toutes » : toutes les plantes.
 // Les gestionnaires sont des fonctions fléchées : () => { ... }
+const boutonInterieur = document.getElementById("btn-interieur");
+boutonInterieur.addEventListener("click", () => {
+  const plantesInterieur = filtrerParLieu(plantes, "intérieur");
+  afficherPlantes(plantesInterieur);
+});
 
+const boutonExterieur = document.getElementById("btn-exterieur")
+boutonExterieur.addEventListener("click", () => {
+    const plantesExterieur = filtrerParLieu(plantes, "extérieur")
+    afficherPlantes(plantesExterieur)
+})
 
+const boutonToutes = document.getElementById("btn-toutes")
+boutonToutes.addEventListener("click", () => {
+    afficherPlantes(plantes)
+})
 
 // TODO 6 — Le bouton actif
 // Le bouton cliqué prend la classe "actif", les deux autres la perdent.
-
-
 
 // =====================================================
 // Questions de recul (réponds en commentaire ici)
