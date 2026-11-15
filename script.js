@@ -79,26 +79,34 @@ afficherPlantes(plantes);
 const boutonInterieur = document.getElementById("btn-interieur");
 boutonInterieur.addEventListener("click", () => {
   const plantesInterieur = filtrerParLieu(plantes, "intérieur");
+        activerBouton(boutonInterieur)
   afficherPlantes(plantesInterieur);
 });
 
 const boutonExterieur = document.getElementById("btn-exterieur")
 boutonExterieur.addEventListener("click", () => {
     const plantesExterieur = filtrerParLieu(plantes, "extérieur")
+        activerBouton(boutonExterieur)
     afficherPlantes(plantesExterieur)
 })
 
 const boutonToutes = document.getElementById("btn-toutes")
 boutonToutes.addEventListener("click", () => {
+        activerBouton(boutonToutes)
     afficherPlantes(plantes)
 })
 
 // TODO 6 — Le bouton actif
 // Le bouton cliqué prend la classe "actif", les deux autres la perdent.
-
+function activerBouton(bouton) {
+    boutonToutes.classList.remove("actif")
+    boutonInterieur.classList.remove("actif")
+    boutonExterieur.classList.remove("actif")
+        bouton.classList.add("actif")
+}
 // =====================================================
 // Questions de recul (réponds en commentaire ici)
-// 1.
-// 2.
-// 3.
+// 1.La fonction filtrerParLieu est facile à tester avec jest, car elle renvoie un tableauque l'on peut vérifier.
+// 2.Cela reste sur la même page. Il n'y a pas de changement
+// 3.Si on inverse l'ordre des deux balises, on obtient l'erreur "plantes is not defined";
 // =====================================================
