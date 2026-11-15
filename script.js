@@ -23,7 +23,7 @@ function compterAArroser(liste) {
 }
 
 // Vérifie dans la console avant de passer à la suite :
-console.log(compterAArroser(plantes)) // doit afficher 4
+// console.log(compterAArroser(plantes)) // doit afficher 4
 
 
 // TODO 2 — filtrerParLieu(liste, lieu)
@@ -31,9 +31,18 @@ console.log(compterAArroser(plantes)) // doit afficher 4
 // est égal au paramètre lieu ("intérieur" ou "extérieur").
 function filtrerParLieu(liste, lieu) {
 
+    const resultat = []
+
+    liste.forEach((plante) => {
+        if (plante.lieu === lieu) {
+            resultat.push(plante);
+        }
+    })
+    return resultat;
+
 }
 
-// console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
+console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
 
 
 // ---------- PARTIE 2 : les fonctions qui AFFICHENT ----------
