@@ -42,7 +42,7 @@ function filtrerParLieu(liste, lieu) {
 
 }
 
-console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
+// console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
 
 
 // ---------- PARTIE 2 : les fonctions qui AFFICHENT ----------
@@ -56,13 +56,27 @@ console.log(filtrerParLieu(plantes, "intérieur")) // doit afficher 4 plantes
 // 4. Mets à jour <p id="compteur"> : « 4 plantes à arroser sur 8 »
 //    (utilise compterAArroser, ne recompte pas ici)
 function afficherPlantes(liste) {
+    const maliste = document.getElementById("liste")
+    maliste.textContent = "";
+    
+    liste.forEach((plante)  => {
+        const element = document.createElement("li")
 
+        element.textContent = plante.emoji + " " + plante.nom;
+        if (plante.aArroser) {
+        element.classList.add("a-arroser");    
+        }
+
+        maliste.appendChild(element)
+    })
+        const compteur = document.getElementById("compteur")
+        compteur.textContent = `${compterAArroser(liste)} plantes à arroser sur ${liste.length}`
 }
 
 
 // TODO 4 — Au chargement de la page, affiche toutes les plantes.
 
-
+afficherPlantes(plantes)
 
 // ---------- PARTIE 3 : les clics ----------
 
